@@ -18,7 +18,7 @@ delta1 = 2;
 kappa1 = 3.2e-3; % 3.2e-3
 kappa2 = 5e-3;
 p1 = 210;
-c1 = 10;
+c1 = 5;
 beta_prime1 = 3e-9;
 gamma_prime1 = 5e-10; 
 delta2 = delta1;
@@ -33,18 +33,18 @@ d = 2;
 s = 5e-1; 
 % k = 5;
 eta1 = 3e-8;
-eta2 = 5e-8; % 13.3e-1
+eta2 = 13.3e-1; % 13.3e-1
 
 
 delta_M = 1/25;
-delta_MA = 2/25;
+delta_MA = 0.18; %%%% an important parameter influencing system dynamics. 
 
-mu1 = 1e-4; % 1e-4
+mu1 = 1; % 1e-4
 % mu2 = 5e-3; 
 
 % kappa_A = 1e-6;
-delta_E = 0.57;
-rho2 = 4.2e-1;
+delta_E = 2;
+% rho2 = 4.2e-1;
 
 g = 0.8;
 C_t = 1e+7;
@@ -54,7 +54,7 @@ M_max = 1e+6;
 %% Time1 
 
 start_time = 0;
-end_time = 20;   % varied 
+end_time = 14;   % varied 
 number_report_time_point = (end_time - start_time) * 24 + 1;
 report_time_point = linspace(start_time,end_time,number_report_time_point);
 len = length(report_time_point);
@@ -93,7 +93,7 @@ options = odeset('RelTol',1e-3, 'AbsTol',1e-6);
 [t,y1] = ode15s(@fn1,report_time_point, init1, options, ...
                  beta1, phi,rho,xi,delta1,kappa1,p1,c1,beta_prime1,...
                  gamma_prime1,q1,q2,d,s,eta1,eta2,delta_M,delta_MA,...
-                 mu1,rho2,delta_E,...
+                 mu1,delta_E,...
                  g,C_t,kappa2,MA_max,M_max);
 
 
@@ -116,10 +116,6 @@ figure(95)
 plot(report_time_point,y1(:,8))
                  
 %}
-
-
-
-
 
 
 
