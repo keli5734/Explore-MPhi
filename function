@@ -1,17 +1,20 @@
 function yn = fn1(~,y,beta1, phi,rho,xi,delta1,kappa1,p1,c1,beta_prime1,...
-                 gamma_prime1,q1,q2,d,s,eta1,eta2,delta_M,delta_MA,mu1,...
-                 rho2,delta_E,...
-                 g,C_t,kappa2,MA_max,M_max)
+                 gamma_prime1,q1,q2,delta_F,s,eta1,eta2,delta_M,delta_MA,...
+                 g,C_t,kappa2,MA_max,M_max,kappa3,...
+                 m3,delta_E,...
+                 m1,delta_B,m2,delta_A)
             
-            yn = zeros(8,1);
-            yn(1) = g * (y(1) + y(4)) * (1 - (y(1) + y(2) + y(4))/C_t) - beta1 * y(1) * y(3) - phi * y(1) * y(5) + rho * y(4);
-            yn(2) = beta1 * y(1) * y(3) - delta1 * y(2) - kappa1 * y(7) * y(2) - kappa2 * y(8) * y(2);
-            yn(3) = p1 * y(2) - c1 * y(3) - beta_prime1 * y(1) * y(3) - gamma_prime1 * y(6) * y(3);
+            yn = zeros(10,1);
+            yn(1) = g * (y(1) + y(4)) * (1 - (y(1) + y(2) + y(4))/C_t) - beta1 * y(1) * y(3) - phi * y(1) * y(5) + rho * y(4); % T
+            yn(2) = beta1 * y(1) * y(3) - delta1 * y(2) - kappa1 * y(7) * y(2) - kappa2 * y(10) * y(2); % I 
+            yn(3) = p1 * y(2) - c1 * y(3) - beta_prime1 * y(1) * y(3) - gamma_prime1 * y(6) * y(3) - kappa3 * y(9) * y(3);  % V
             yn(4) = phi * y(1) * y(5) - rho * y(4) - xi * y(4);
-            yn(5) = q1 * y(2) + q2 * y(7) - d * y(5);
-            yn(6) = s * (1 - y(6)/M_max) * y(6) - eta1 * y(3) * y(6) - delta_M * y(6); % +rho2 * y(7);
-            yn(7) = eta1 * y(3) * y(6) + eta2 * y(5) * (1 - y(7)/MA_max) - delta_MA * y(7); % -rho2 * y(7);
-            yn(8) = mu1 * y(7) - delta_E * y(8);
+            yn(5) = q1 * y(2) + q2 * y(7) - delta_F * y(5);
+            yn(6) = s * (1 - y(6)/M_max) * y(6) - eta1 * y(3) * y(6) - delta_M * y(6);  
+            yn(7) = eta1 * y(3) * y(6) + eta2 * y(5) * (1 - y(7)/MA_max) - delta_MA * y(7);  
+            yn(8) = m1 * y(7) * (1 - y(8)) - delta_B * y(8); 
+            yn(9) = m2 * y(8) - delta_A * y(9); % A 
+            yn(10) = m3 * y(7) - delta_E * y(10); % E
 end 
 
 
